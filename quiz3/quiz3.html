@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+      body{
+         background-color: #FFEBDF;
+      }
+      .ml14 {
+  font-weight: 200;
+  font-size: 3.2em;
+}
+
+.ml14 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.1em;
+  padding-right: 0.05em;
+  padding-bottom: 0.15em;
+}
+
+.ml14 .line {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+  transform-origin: 100% 100%;
+  bottom: 0;
+}
+
+.ml14 .letter {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 18pt;
+  font-weight: bold;
+}
+  
+  .ml142 {
+  font-weight: 200;
+  font-size: 3.2em;
+}
+
+.ml142 .text-wrapper2 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.1em;
+  padding-right: 0.05em;
+  padding-bottom: 0.15em;
+}
+
+.ml142 .line2 {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+  transform-origin: 100% 100%;
+  bottom: 0;
+}
+
+.ml142 .letter2 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 18pt;
+  font-weight: bold;
+}
+
+  .ml143 {
+  font-weight: 200;
+  font-size: 3.2em;
+}
+
+.ml143 .text-wrapper3 {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.1em;
+  padding-right: 0.05em;
+  padding-bottom: 0.15em;
+}
+
+.ml143 .line3 {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+  transform-origin: 100% 100%;
+  bottom: 0;
+}
+
+.ml143 .letter3 {
+  display: inline-block;
+  line-height: 1em;
+  color: green;
+  font-size: 18pt;
+  font-weight: bold;
+}
+
+.ml2 {
+  font-weight: 900;
+  font-size: 3.5em;
+}
+
+.ml2 .letter {
+  display: inline-block;
+  line-height: 1em;
+  font-size: 25pt;
+}
+
+#watermark {
+  color: #d0d0d0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  z-index: -1;
+  left: 27%;
+  top: 8px;
+  opacity: 0.05;
+}
+
+    </style>
+    <script type="text/javascript">
+  function timeout()
+      {
+        //var minute=Math.floor((timeLeft-(hours*60*60))/60);
+        var minute=Math.floor(timeLeft/60);
+        var second=timeLeft%60;
+        //var hrs=checktime(hours);
+        var mint=checktime(minute);
+        var sec=checktime(second);
+        if(timeLeft<=0)
+        {
+            clearTimeout(tm);
+            document.getElementById("s1").disabled = true;
+            check();
+            document.getElementById("scoring").innerHTML = "Your Score is " + count;
+            if(count==5)
+            {
+              document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions";
+            }
+        }
+        else
+        {
+            document.getElementById("time").innerHTML=mint+":"+sec;
+        }
+        timeLeft--;
+        var tm=setTimeout(function(){timeout()},1000);
+      }
+      function checktime(msg)
+      {
+        if(msg<10)
+        {
+            msg="0"+msg;
+        }
+        return msg;
+      }
+</script>
+  <script type="text/javascript">
+    function check()
+    {
+      document.getElementById("a11").disabled = true;
+      document.getElementById("a12").disabled = true;
+      document.getElementById("a21").disabled = true;
+      document.getElementById("a22").disabled = true;
+      document.getElementById("a31").disabled = true;
+      document.getElementById("a32").disabled = true;
+      document.getElementById("s1").disabled = true;
+      var q1 = document.myform.q1.value;
+      var q2 = document.myform.q2.value;
+      var q3 = document.myform.q3.value;
+      var count = 0;
+
+      if(q1 == "b")
+      {
+        count++;
+        document.getElementById("scoring").innerHTML = "Your Score is " + count;
+        document.getElementById("ans1").innerHTML = "Correct";
+        // Wrap every letter in a span
+        $('.ml14 .letters').each(function(){
+          $(this).html($(this).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
+        });
+
+        anime.timeline({loop: true})
+          .add({
+          targets: '.ml14 .line',
+          scaleX: [0,1],
+          opacity: [0.5,1],
+          easing: "easeInOutExpo",
+          duration: 900
+          }).add({
+          targets: '.ml14 .letter',
+          opacity: [0,1],
+          translateX: [40,0],
+          translateZ: 0,
+          scaleX: [0.3, 1],
+          easing: "easeOutExpo",
+          duration: 800,
+          offset: '-=600',
+          delay: function(el, i) {
+            return 150 + 25 * i;
+          }
+          }).add({
+          targets: '.ml14',
+          opacity: 0,
+          duration: 1000,
+          easing: "easeOutExpo",
+          delay: 1000
+          });
+      }
+      else
+      {
+        var str = "<h6>Oops! The answer is Yes</h6>";
+        var res = str.fontcolor("red");
+        document.getElementById("ans1").innerHTML = res;
+      }
+
+      if(q2 == "b")
+      {
+        count++;
+        document.getElementById("scoring").innerHTML = "Your Score is " + count;
+        document.getElementById("ans2").innerHTML = "Correct";
+        // Wrap every letter in a span
+        $('.ml142 .letters2').each(function(){
+          $(this).html($(this).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter2'>$&</span>"));
+        });
+
+        anime.timeline({loop: true})
+          .add({
+          targets: '.ml142 .line2',
+          scaleX: [0,1],
+          opacity: [0.5,1],
+          easing: "easeInOutExpo",
+          duration: 900
+          }).add({
+          targets: '.ml142 .letter2',
+          opacity: [0,1],
+          translateX: [40,0],
+          translateZ: 0,
+          scaleX: [0.3, 1],
+          easing: "easeOutExpo",
+          duration: 800,
+          offset: '-=600',
+          delay: function(el, i) {
+            return 150 + 25 * i;
+          }
+          }).add({
+          targets: '.ml142',
+          opacity: 0,
+          duration: 1000,
+          easing: "easeOutExpo",
+          delay: 1000
+          });
+      }
+      else
+      {
+        var str = "<h6>Oops! The answer is Yes</h6>";
+        var res = str.fontcolor("red");
+        document.getElementById("ans2").innerHTML = res;
+      }
+
+      if(q3 == "b")
+      {
+        count++;
+        document.getElementById("scoring").innerHTML = "Your Score is " + count;
+        document.getElementById("ans3").innerHTML = "Correct";
+        // Wrap every letter in a span
+        $('.ml143 .letters3').each(function(){
+          $(this).html($(this).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter3'>$&</span>"));
+        });
+
+        anime.timeline({loop: true})
+          .add({
+          targets: '.ml143 .line3',
+          scaleX: [0,1],
+          opacity: [0.5,1],
+          easing: "easeInOutExpo",
+          duration: 900
+          }).add({
+          targets: '.ml143 .letter3',
+          opacity: [0,1],
+          translateX: [40,0],
+          translateZ: 0,
+          scaleX: [0.3, 1],
+          easing: "easeOutExpo",
+          duration: 800,
+          offset: '-=600',
+          delay: function(el, i) {
+            return 150 + 25 * i;
+          }
+          }).add({
+          targets: '.ml143',
+          opacity: 0,
+          duration: 1000,
+          easing: "easeOutExpo",
+          delay: 1000
+          });
+      }
+      else
+      {
+        var str = "<h6>Oops! The answer is Yes</h6>";
+        var res = str.fontcolor("red");
+        document.getElementById("ans3").innerHTML = res;
+      }
+      document.getElementById("totscore").innerHTML = "Total correct answer " + count;
+      document.getElementById("totcoins").innerHTML = "Total coins achieved " + count;
+      if (count == 3) {
+            document.getElementById("congrats").innerHTML = "Congratulations You solved all the questions correct";
+      $('.ml2').each(function(){
+        $(this).html($(this).text().replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>"));
+      });
+
+      anime.timeline({loop: true})
+        .add({
+        targets: '.ml2 .letter',
+        scale: [4,1],
+        opacity: [0,1],
+        translateZ: 0,
+        easing: "easeOutExpo",
+        duration: 950,
+        delay: function(el, i) {
+          return 70*i;
+        }
+        }).add({
+        targets: '.ml2',
+        opacity: 0,
+        duration: 1000,
+        easing: "easeOutExpo",
+        delay: 1000
+        });
+          }
+    }
+  </script>
+</head>
+<body onload="timeout()">
+  <div id="watermark">
+<img src="Logo.png" align="center" width="700px" height="700px">
+</div>
+<br>
+  <script type="text/javascript">
+        var timeLeft=1*60;
+    </script>
+
+    <h3><div id="time" style="float:right ; position: fixed; right: 100px">Timeout</div></h3><br>
+  <h3 id="scoring" style="position: fixed; font-size: 18pt ; font-family: Comic Sans MS, Comic Sans, cursive; color: #FF791F">Your Score is 0</h3>
+  <center><h2 id="totscore" style="font-family: Comic Sans MS, Comic Sans, cursive; font-weight: bold; color: #FF791F"></h2></center>
+  <center><h2 id="totcoins" style="font-family: Comic Sans MS, Comic Sans, cursive; font-weight: bold; color: #FF791F"></h2></center>
+  <br><br>
+  <div class="container">
+  <div class="panel panel-warning">
+      <div class="panel-heading" style="text-align: center; font-family: Comic Sans MS, Comic Sans, cursive;"><h3>Reflection time</h3></div>
+    </div>
+  <h4 class="ml2" id="congrats" style="text-align: center"></h4><br>
+  <form name="myform">
+  <div class="container">
+    <div class="card">
+      <h6 class="card-header" style="font-size: 12pt ; font-family: Comic Sans MS, Comic Sans, cursive;">Q1. Do you think physically or mentally challenged individuals should be excluded from the society? </h6>
+    </div>
+    <div class="card-body">
+      <h5 style="font-family: Comic Sans MS, Comic Sans, cursive;"><input type="radio" name="q1" id="a11" value="a"> Yes</h5>
+       <h5 style="font-family: Comic Sans MS, Comic Sans, cursive;"><input type="radio" name="q1" id="a12" value="b"> No, the society should be inclusive for all</h5>
+      <h6 class="ml14">
+        <span class="text-wrapper">
+        <span class="letters" id="ans1"></span>
+        <span class="line"></span>
+        </span>
+      </h6>
+    </div>
+    <div class="card">
+      <h6 class="card-header" style="font-size: 12pt ; font-family: Comic Sans MS, Comic Sans, cursive;">Q2. Do you think if Rony would have judged Richard for his disability, he would be have been able to develop friendship with Richard? </h6>
+    </div>
+    <div class="card-body">
+       <h5 style="font-family: Comic Sans MS, Comic Sans, cursive;"><input type="radio" name="q2" id="a21" value="a"> Yes</h5>
+       <h5 style="font-family: Comic Sans MS, Comic Sans, cursive;"><input type="radio" name="q2" id="a22" value="b"> No</h5>
+      <h6 class="ml142">
+        <span class="text-wrapper2">
+        <span class="letters2" id="ans2"></span>
+        <span class="line2"></span>
+        </span>
+      </h6>
+    </div>
+    <div class="card">
+      <h6 class="card-header" style="font-size: 12pt ; font-family: Comic Sans MS, Comic Sans, cursive;">Q3. Which of the following qualities did Rony had </h6>
+    </div>
+    <div class="card-body">
+       <h5 style="font-family: Comic Sans MS, Comic Sans, cursive;"><input type="radio" name="q3" id="a31" value="a"> Self-centeredness, Unkind, judgemental</h5>
+       <h5 style="font-family: Comic Sans MS, Comic Sans, cursive;"><input type="radio" name="q3" id="a32" value="b"> Understanding, Caring, Compassionate</h5>
+      <h6 class="ml143">
+        <span class="text-wrapper3">
+        <span class="letters3" id="ans3"></span>
+        <span class="line3"></span>
+        </span>
+      </h6>
+    </div>
+    <input type="button" style="font-size: 12pt ; font-family: Comic Sans MS, Comic Sans, cursive;" name="submit" value="Submit" id="s1" onclick="check()" class="btn btn-dark m-auto d-block">
+  </div>
+  </form>
+</body>
+</html>
